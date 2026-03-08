@@ -1,0 +1,23 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{LOAD 𝑅𝑖 [𝑣𝑎𝑙𝑢𝑒] - value is in long form}
+
+SigmaA, IP <- IP(Bbus), IP(Abus) + 1
+{SigmaA = ip, IP = ip + 1}
+
+SigmaR, IP, SigmaA <- RAM[SigmaA], IP(Abus) + 1, IP
+{SigmaA = ip + 1, IP = ip + 2, SigmaR = RAM[ip]}
+
+IR, SigmaR <- SigmaR(Bbus), RAM[SigmaA]
+{SigmaA = ip + 1, IP = ip + 2, SigmaR = RAM[ip + 1], IR = RAM[ip]}
+{IR has the load instruction - load into RA}
+
+SigmaA <- SigmaR(Bbus)
+{SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[ip + 1], IR = RAM[ip]}
+
+
+SigmaR <- RAM[SigmaA]
+{SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip]}
+
+RA <- SigmaR
+{SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip], RA = RAM[RAM[ip + 1]]}

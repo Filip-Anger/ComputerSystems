@@ -1,0 +1,17 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+
+SigmaA, IP <- IP(Bbus), IP(Abus) + 1
+{SigmaA = ip, IP = ip + 1}
+
+IR <- SigmaR(Bbus)
+{SigmaA = ip, IP = ip + 1, SigmaR = RAM[ip], IR = RAM[ip]}
+
+SigmaA <- IR.compl 
+{SigmaA = IR.compl, IP = ip + 1, SigmaR = RAM[ip], IR = RAM[ip]}
+
+SigmaR <- RAM[SigmaA]
+{SigmaA = IR.compl, IP = ip + 1, SigmaR = RAM[IR.compl], IR = RAM[ip]}
+
+RA <- SigmaR
+{SigmaA = ir.compl, IP = ip + 1, SigmaR = RAM[ir.compl], IR = RAM[ip], RA = RAM[ir.compl]}

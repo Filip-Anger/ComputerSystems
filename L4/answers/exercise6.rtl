@@ -1,0 +1,13 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{STOR 𝑅𝑖 [𝑣𝑎𝑙𝑢𝑒] - store Ri in adress value}
+
+SigmaA, SigmaW <- IR.compl(Bbus), RA
+{SigmaA = RAM[ip], SigmaW = ra}
+{should I always update IP and SigmaA to keep the invariant?}
+
+RAM[SigmaA] <- SigmaW
+{SigmaA = RAM[ip], SigmaW = ra, RAM[RAM[ip]] = ra}
+
+SigmaA, IP <- IP, IP + 1
+{SigmaA = ip + 2, SigmaW = ra, RAM[RAM[ip]] = ra, IP = ip + 3}
