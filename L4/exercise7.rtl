@@ -4,4 +4,4 @@
 {do nothing? -> just go next}
 
 IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
-{IR = RAM[ip + 1], SigmaA = ip + 2, IP = ip + 3}
+{SigmaA = ip + 2, IP = ip + 3, IR = RAM[ip + 1]}

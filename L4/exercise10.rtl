@@ -1,15 +1,12 @@
 {Filip Anger 2254974}
 {Marek Richnak 2287412}
-{WHEN TAKEN}
+{WHEN TAKEN LONG BNE disp (when taken) }
 
-{We have to subtract...}
-{IP = ip + 2, SigmaA = ip + 1}
+IR <- RAM[SigmaA]
+{IR = RAM[ip + 1]}
 
-IP <- IP(Abus) - 1
-{IP = ip + 1}
+IP, CC <- SigmaA(Bbus) + IR.compl(Abus), ALU.cc
+{CC = alu.cc, IP = ip + 1 + RAM[ip + 1]}
 
-IP, CC <- IP(Bbus) + IR.compl(Abus), ALU.cc
-{CC = alu.cc, IP = ip + 1 + disp}
-
-{SigmaA, IP <- IP, IP + 1}
+SigmaA, IP <- IP, IP + 1
 {CC = alu.cc, IP = ip + disp + 2, SigmaA = ip + disp + 1}

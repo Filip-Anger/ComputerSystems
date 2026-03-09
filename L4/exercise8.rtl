@@ -6,5 +6,5 @@
 SigmaR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
 {IP = ip + 3, SigmaA = ip + 2, SigmaR = RAM[ip + 1]}
 
-RA, CC <- RA(Abus) + SigmaR(Bbus), ALU.cc
-{IP = ip + 3, SigmaA = ip + 2, SigmaR = RAM[ip + 1], RA = ra + RAM[ip + 1]}
+RA, CC, IR, SigmaA, IP <- RA(Abus) + SigmaR(Bbus), ALU.cc, RAM[SigmaA], IP, IP + 1
+{IP = ip + 4, SigmaA = ip + 3, IR = RAM[ip + 2] SigmaR = RAM[ip + 1], RA = ra + RAM[ip + 1]}
