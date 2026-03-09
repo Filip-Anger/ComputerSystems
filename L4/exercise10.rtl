@@ -9,4 +9,7 @@ IP, CC <- SigmaA(Bbus) + IR.compl(Abus), ALU.cc
 {CC = alu.cc, IP = ip + 1 + RAM[ip + 1]}
 
 SigmaA, IP <- IP, IP + 1
-{CC = alu.cc, IP = ip + disp + 2, SigmaA = ip + disp + 1}
+{CC = alu.cc, IP = ip + 2 + RAM[ip + 1], SigmaA = ip + 1 + RAM[ip + 1]}
+
+IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
+{CC = alu.cc, IP = ip + 3 + RAM[ip + 1], SigmaA = ip + 2 + RAM[ip + 1], IR =  ip + 1 + RAM[ip + 1]}
