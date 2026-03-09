@@ -1,6 +1,0 @@
-{Filip Anger 2254974}
-{Marek Richnak 2287412}
-{ADD 𝑅𝑖 𝑣𝑎𝑙𝑢𝑒}
-
-SigmaA, IP, RA, IR <- IP, IP + 1, RA(Abus) + IR.compl(Bbus), RAM[SigmaA]
-{SigmaA = ip + 2, IP = ip + 3, IR = RAM[ip + 1], RA = RA + IR.compl}

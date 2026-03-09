@@ -1,7 +1,0 @@
-{Filip Anger 2254974}
-{Marek Richnak 2287412}
-{BEQ disp (when not taken)}
-{do nothing? -> just go next}
-
-IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
-{IR = RAM[ip + 1], SigmaA = ip + 2, IP = ip + 3}

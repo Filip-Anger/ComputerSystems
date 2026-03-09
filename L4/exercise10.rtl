@@ -11,5 +11,5 @@ IP <- IP(Abus) - 1
 IP <- IP(Bbus) + IR.compl(Abus)
 {IP = ip + 1 + disp}
 
-SigmaA, IP <- IP, IP + 1
+{SigmaA, IP <- IP, IP + 1}
 {IP = ip + disp + 2, SigmaA = ip + disp + 1}

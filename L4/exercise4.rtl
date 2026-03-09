@@ -15,7 +15,6 @@ IR, SigmaR <- SigmaR(Bbus), RAM[SigmaA]
 SigmaA <- SigmaR(Bbus)
 {SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[ip + 1], IR = RAM[ip]}
 
-
 SigmaR <- RAM[SigmaA]
 {SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip]}
 

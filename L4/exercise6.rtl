@@ -9,5 +9,5 @@ SigmaA, SigmaW <- IR.compl(Bbus), RA
 RAM[SigmaA] <- SigmaW
 {SigmaA = RAM[ip], SigmaW = ra, RAM[RAM[ip]] = ra}
 
-SigmaA, IP <- IP, IP + 1
+{SigmaA, IP <- IP, IP + 1}
 {SigmaA = ip + 2, SigmaW = ra, RAM[RAM[ip]] = ra, IP = ip + 3}
