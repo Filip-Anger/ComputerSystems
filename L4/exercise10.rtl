@@ -8,8 +8,8 @@
 IP <- IP(Abus) - 1
 {IP = ip + 1}
 
-IP <- IP(Bbus) + IR.compl(Abus)
-{IP = ip + 1 + disp}
+IP, CC <- IP(Bbus) + IR.compl(Abus), ALU.cc
+{CC = alu.cc, IP = ip + 1 + disp}
 
 {SigmaA, IP <- IP, IP + 1}
-{IP = ip + disp + 2, SigmaA = ip + disp + 1}
+{CC = alu.cc, IP = ip + disp + 2, SigmaA = ip + disp + 1}

@@ -1,8 +1,0 @@
-{IP = ip}
-SigmaA, IP <- IP(Bbus), IP(Abus) + 1
-{SigmaA = ip, IP = ip + 1}
-SigmaR <- RAM[SigmaA]
-{SigmaA = ip, SimgaR = RAM[ip], IP = ip + 1}
-IR <- SigmaR(Bbus)
-{SigmaA = ip, SigmaR = RAM[ip], IP = ip + 1, IR = RAM[ip]}
-

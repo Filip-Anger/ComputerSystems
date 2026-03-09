@@ -7,6 +7,6 @@ SigmaR, SigmaW <- RAM[SigmaA], RA
 SigmaA <- SigmaR
 {SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[ip + 1], SigmaW = ra}
 
-RAM[SigmaA], SigmaA, IP <- SigmaW, IP, IP + 1
-{RAM[ip + 1] = ra, IP = ip + 3, SigmaA = ip + 2, SigmaR = RAM[ip + 1], SigmaW = ra}
+RAM[SigmaA], SigmaA, IP, CC <- SigmaW, IP, IP + 1, ALU.cc
+{CC = alu.cc, RAM[ip + 1] = ra, IP = ip + 3, SigmaA = ip + 2, SigmaR = RAM[ip + 1], SigmaW = ra}
 

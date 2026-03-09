@@ -8,7 +8,7 @@ SigmaA, IP <- IP(Bbus), IP(Abus) + 1
 SigmaR, IP, SigmaA <- RAM[SigmaA], IP(Abus) + 1, IP
 {SigmaA = ip + 1, IP = ip + 2, SigmaR = RAM[ip]}
 
-IR, SigmaR <- SigmaR(Bbus), RAM[SigmaA]
+IR, SigmaR <- SigmaR, RAM[SigmaA]
 {SigmaA = ip + 1, IP = ip + 2, SigmaR = RAM[ip + 1], IR = RAM[ip]}
 {IR has the load instruction - load into RA}
 
@@ -18,5 +18,5 @@ SigmaA <- SigmaR(Bbus)
 SigmaR <- RAM[SigmaA]
 {SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip]}
 
-RA <- SigmaR
-{SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip], RA = RAM[RAM[ip + 1]]}
+RA, CC <- SigmaR, ALU.cc
+{CC = alu.cc, SigmaA = RAM[ip + 1], IP = ip + 2, SigmaR = RAM[RAM[ip + 1]], IR = RAM[ip], RA = RAM[RAM[ip + 1]]}
