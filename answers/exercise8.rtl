@@ -1,0 +1,10 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{ADD 𝑅𝑖 𝑣𝑎𝑙𝑢𝑒 - assume long only?}
+{Budeme assumovat ze je to long, takze prvy je instruction a druhy value}
+
+SigmaR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
+{IP = ip + 3, SigmaA = ip + 2, SigmaR = RAM[ip + 1]}
+
+RA, CC, IR, SigmaA, IP <- RA(Abus) + SigmaR(Bbus), ALU.cc, RAM[SigmaA], IP, IP + 1
+{IP = ip + 4, SigmaA = ip + 3, IR = RAM[ip + 2] SigmaR = RAM[ip + 1], RA = ra + RAM[ip + 1]}

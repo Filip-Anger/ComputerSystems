@@ -1,0 +1,12 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{STOR 𝑅𝑖 [𝑣𝑎𝑙𝑢𝑒] LONG FORM}
+
+SigmaR, SigmaW, SigmaA, IP <- RAM[SigmaA], RA, IP, IP + 1
+{SigmaA = ip + 2, IP = ip + 3, SigmaR = RAM[ip + 1], SigmaW = ra}
+
+SigmaA, IR <- SigmaR(Bbus), RAM[SigmaA]
+{IR = RAM[ip + 2], SigmaA = RAM[ip + 1], IP = ip + 3, SigmaR = RAM[ip + 1], SigmaW = ra}
+
+RAM[SigmaA], SigmaA, IP, CC <- SigmaW, IP, IP + 1, ALU.cc
+{CC = alu.cc, RAM[RAM[IP + 1]] = ra ,IR = RAM[ip + 2], SigmaA = ip + 3, IP = ip + 4, SigmaR = RAM[ip + 1], SigmaW = ra}

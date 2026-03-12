@@ -1,0 +1,21 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{LOAD 𝑅𝑖 [𝑣𝑎𝑙𝑢𝑒]}
+
+SigmaA, IP, CC <- IP(Bbus), IP(Abus) + 1, ALU.cc
+{SigmaA = ip, IP = ip + 1, , CC = alu.cc}
+
+SigmaR <- RAM[SigmaA]
+{SigmaA = ip, IP = ip + 1, , CC = alu.cc, SigmaR = RAM[ip]}
+
+IR <- SigmaR(Bbus)
+{SigmaA = ip, IP = ip + 1, SigmaR = RAM[ip], IR = RAM[ip]}
+
+SigmaA <- IR.val 
+{SigmaA = IR.val, IP = ip + 1, SigmaR = RAM[ip], IR = RAM[ip]}
+
+SigmaR <- RAM[SigmaA]
+{SigmaA = IR.val, IP = ip + 1, SigmaR = RAM[IR.val], IR = RAM[ip]}
+
+RA, CC <- SigmaR, ALU.cc
+{CC = alu.cc, SigmaA = ir.val, IP = ip + 1, SigmaR = RAM[ir.val], IR = RAM[ip], RA = RAM[ir.val]}

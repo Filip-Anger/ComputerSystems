@@ -1,0 +1,10 @@
+
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{STOR 𝑅𝑖 [𝑣𝑎𝑙𝑢𝑒] - store Ri in adress value}
+
+IPB, SigmaA, SigmaW <- RAM[SigmaA], IR.compl(Bbus), RA
+{SigmaA = RAM[ip], SigmaW = ra, IPB = RAM[ip + 1]}
+
+RAM[SigmaA], SigmaA, IP, IR, CC <- SigmaW, IP, IP + 1, IPB, ALU.cc
+{SigmaA = ip + 2, SigmaW = ra, RAM[RAM[ip]] = ra, IP = ip + 3, IR = RAM[ip + 1], CC = alu.cc}

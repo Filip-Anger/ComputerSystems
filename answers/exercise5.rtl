@@ -1,0 +1,7 @@
+
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{ADD 𝑅𝑖 𝑣𝑎𝑙𝑢𝑒}
+
+IR, SigmaA, IP, RA, CC <-RAM[SigmaA], IP, IP + 1, RA(Abus) + IR.compl(Bbus), ALU.cc
+{SigmaA = ip + 2, IP = ip + 3, IR = RAM[ip + 1], RA = RA + IR.compl, CC = alu.cc}

@@ -1,0 +1,11 @@
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{BNE disp (when taken, long form)}
+
+SigmaR, IP <- RAM[SigmaA], IP(Abus) - 1
+
+IP <- IP(Abus) + SigmaR(Bbus)
+
+SigmaA, IP <- IP, IP +1
+
+IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
