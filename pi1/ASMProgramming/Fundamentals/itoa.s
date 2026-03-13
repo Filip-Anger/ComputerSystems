@@ -29,8 +29,8 @@ exit:
 @ Returns:
 @   R0: ASCII character value of provided integer
 itoa:
-        @ Insert conversion code here
-        MOV     PC, LR
+        CMP R0, 
+        MOV PC, LR
 
 .data
 
