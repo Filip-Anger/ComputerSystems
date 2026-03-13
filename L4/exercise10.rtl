@@ -13,3 +13,15 @@ SigmaA, IP <- IP, IP + 1
 
 IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
 {CC = alu.cc, IP = ip + 3 + RAM[ip + 1], SigmaA = ip + 2 + RAM[ip + 1], IR =  ip + 1 + RAM[ip + 1]}
+
+{Filip Anger 2254974}
+{Marek Richnak 2287412}
+{BNE disp (when taken, long form)}
+
+SigmaR, IP <- RAM[SigmaA], IP(Abus) - 1
+
+IP <- IP(Abus) + SigmaR(Bbus)
+
+SigmaA, IP <- IP, IP +1
+
+IR, SigmaA, IP <- RAM[SigmaA], IP, IP + 1
