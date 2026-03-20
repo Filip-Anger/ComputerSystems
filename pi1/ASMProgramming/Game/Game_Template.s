@@ -170,10 +170,10 @@ gen_number:
         
                                     @ TASK: Load address of time struct to R0
         LDR R1, #0                            @ TASK: Load 0 into R1 (time zone)
-        LDR R7,                            @ TASK: Place system call number for gettimeofday in R7
-        SWI 0  ???                            @ TASK: Make the system call
+        LDR R7, #0xE4                           @ TASK: Place system call number for gettimeofday in R7
+        SWI 0                           @ TASK: Make the system call
         LDR R2, []                           @ TASK: Load a register with address of musecs variable
-        LDR R0, =musecs    ???         @ TASK: Load R0 with the value at address of musecs
+        LDR R0, =musecs            @ TASK: Load R0 with the value at address of musecs
         AND R0, #0x7F                @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
                                     
         MOV     R0, #30             @ Return a fixed value until executing on an RPI 
