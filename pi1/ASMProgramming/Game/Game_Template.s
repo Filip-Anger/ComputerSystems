@@ -9,6 +9,7 @@
 .equ SYS_READ, 3
 .equ SYS_WRITE, 4
 .equ SYS_GETTIME, 78
+
 .equ STDOUT, 1
 .equ STDIN, 0
 
