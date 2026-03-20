@@ -14,13 +14,14 @@
 .equ STDOUT,      1
 
 .text
+.include "RandNumHW.s"
 
 @ Game control loop (between main: and _exit:)
 @ Register usage:
 @ R8: generated random number
 @ R9: guesses remaining
 main:
-        BL    gen_number
+        BL    gen_number_hardware
 
         MOV   R8, R0            @ Store 'hidden' number in R8
         MOV   R9, #3            @ Initialise remaining guesses to 3
