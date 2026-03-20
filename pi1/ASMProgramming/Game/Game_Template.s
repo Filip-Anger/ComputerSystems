@@ -18,8 +18,8 @@ main:
 
         MOV   R8, R0            @ Store 'hidden' number in R8
         MOV   R9, #3            @ Initialise remaining guesses to 3
-                                @ TASK: Load new game string
-                                @ TASK: Load new game string length
+        LDR   R1, [new_game]                        @ TASK: Load new game string
+        LDR   R2, #new_game_len                            @ TASK: Load new game string length
         BL    print             @ Print the new game string
 next_guess:
                                 @ TASK: Load prompt string address
