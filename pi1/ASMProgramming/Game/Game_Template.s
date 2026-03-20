@@ -6,6 +6,11 @@
 .global main
 
 .equ SYS_EXIT, 1
+.equ SYS_READ, 3
+.equ SYS_WRITE, 4
+.equ SYS_GETTIME, 0x4E
+.equ STDOUT, 1
+.equ STDIN, 0
 
 .text
 
