@@ -171,7 +171,7 @@ gen_number:
         MOV R1, #0                  @ TASK: Load 0 into R1 (time zone)
         MOV R7, #0xE4               @ TASK: Place system call number for gettimeofday in R7
         SWI 0                       @ TASK: Make the system call
-        MOV R2, R0 + 4                 @ TASK: Load a register with address of musecs variable
+        MOV R2,                @ TASK: Load a register with address of musecs variable
         LDR R0, =R2             @ TASK: Load R0 with the value at address of musecs
         AND R0, #0x7F               @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
                                     
