@@ -32,7 +32,7 @@ next_guess:
         BL    print             @ Print the prompt
 
  	LDR   R0, =input 			@ TASK: Load input buffer address
-        MOV   R1, #3			@ TASK: Load input buffer length
+        MOV   R1, #input_size			@ TASK: Load input buffer length
         BL    read				@ Read 3 chars to input buffer (including newline)
 
 	LDR   R1, =input       
@@ -69,8 +69,8 @@ print:
         STMFD   SP!, {R7,LR}    	@ Push used registers and LR on the stack;
         MOV R2, R1                     	@ TASK: Move number of characters to print(R1) to R2
         MOV R1, R2                    	@ TASK: Move address of output string(R0) to R1
-        MOV R7, #4		    	@ TASK: Put the Syscall number in R?
-        MOV R0, #1            		@ TASK: Put the monitor STDOUT in R? - STDOUT IS 1
+        MOV R7, #SYS_WRITE		    	@ TASK: Put the Syscall number in R?
+        MOV R0, #STDOUT           		@ TASK: Put the monitor STDOUT in R? - STDOUT IS 1
         SWI 0                    	@ TASK: Uncomment this line to make the syscall
         LDMFD   SP!, {R7,LR}    	@ Restore used registers (update SP with !)
         MOV     PC, LR          	@ Return
@@ -85,8 +85,8 @@ read:
         STMFD SP!, {R7, LR}     	@ Push used registers and LR to stack
         MOV R2, R1                        	@ TASK: Move number of characters to read(R1) to R2
         MOV R1, R0                        	@ TASK: Move address of input string(R0) to R1
-        MOV R7, #3                        	@ TASK: Put the Syscall number in R?
-        MOV R0, #0                        	@ TASK: Put the keyboard STDIN in R?
+        MOV R7, #SYS_READ                        	@ TASK: Put the Syscall number in R?
+        MOV R0, #STDIN                        	@ TASK: Put the keyboard STDIN in R?
         SWI 0					@ TASK: Uncomment this line to make the syscall
         LDMFD SP!, {R7, LR}     	@ Restore used registers (update SP with !)
         MOV  PC, LR
@@ -237,8 +237,8 @@ lostgame:         .asciz  "You lose, the number was 00\n"
 .equ              lostgame_len, 28
 .equ              value_offset, 25  @ index into the lostgame 
                                     @ string so the number
-                                    @ can be written into it.
-
+                                    @ can be written into it
+.equ              input_size, 3
 @@@@ Variables
 .align
 input:            .space 3
