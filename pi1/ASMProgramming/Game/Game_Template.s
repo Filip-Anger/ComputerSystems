@@ -26,9 +26,9 @@ next_guess:
         LDR   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
         BL    print             @ Print the prompt
 
- 	LDR   			@ TASK: Load input buffer address
-        LDR   			@ TASK: Load input buffer length
-@        BL    read				@ Read 3 chars to input buffer (including newline)
+ 	LDR   R0			@ TASK: Load input buffer address
+        LDR   R1, #3			@ TASK: Load input buffer length
+        BL    read				@ Read 3 chars to input buffer (including newline)
 
 		LDR   R1, =input       
        	BL    asctonum          @ Convert string to integer.
@@ -62,9 +62,9 @@ exit:
 @   none
 print:                      
         STMFD   SP!, {R7,LR}    	@ Push used registers and LR on the stack;
-                                	@ TASK: Move number of characters to print(R1) to R2
-                                	@ TASK: Move address of output string(R0) to R1
-            				    	@ TASK: Put the Syscall number in R?
+        MOV R2, R1                     	@ TASK: Move number of characters to print(R1) to R2
+        MOV R1, R2                    	@ TASK: Move address of output string(R0) to R1
+        MOV     R7, #4		    	@ TASK: Put the Syscall number in R?
                     		    	@ TASK: Put the monitor STDOUT in R?
         @ SWI 0                 	@ TASK: Uncomment this line to make the syscall
         LDMFD   SP!, {R7,LR}    	@ Restore used registers (update SP with !)

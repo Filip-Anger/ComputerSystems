@@ -61,8 +61,8 @@ exit:               @ The exit system call is used to halt execution and return
 print:
     STMFD SP!, {R7, LR}         @ 4 - We are going to use R7, so put a copy in the stack
 	MOV R7, #4		            @ * 5 - Place the System call number into R7
-		MOV R2, R1                            @ TASK: Move a parameter
-		MOV R1, R0	                            @ TASK: Move another parameter
+	MOV R2, R1                            @ TASK: Move a parameter
+	MOV R1, R0	                            @ TASK: Move another parameter
  	MOV R0, #1		            @ * 6 - Place stdout in R0 (Stdout is monitor)
 	SWI 0	                    @ * 7 - Make the system call using a SoftWare Interrupt (SWI)
     LDMFD SP!, {R7, LR}         @ 8 - Restore R7
