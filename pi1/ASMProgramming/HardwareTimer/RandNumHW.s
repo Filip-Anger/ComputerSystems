@@ -6,14 +6,14 @@
 
 .equ        RAND_LIMIT, 0xF        @ Question: What is the maximum value possible?
 .equ        SYS_EXIT,   0x1
-.equ        CLOCK_ADDR, 0x3F003004 @ TASK: Add clock hardware address constant
+.equ        CLOCK_ADDR, 0x3F003000 @ TASK: Add clock hardware address constant
 
 .text 
-
+.include "Hardware.s"
 
 main:     
     BL      open_mem            @ Open /dev/mem  (requires sudo)
-    MOV     R0, #CLOCK_ADDR     @ TASK: Load hardware clock address
+    LDR     R0, =CLOCK_ADDR     @ TASK: Load hardware clock address
     BL      map                 @ Map hardware clock to memory (R0 contains address)
     LDR     R1, =clockbase      @ TASK: Load address of clockbase variable
     STR     R0, [R1]            @ Store mapped memory start address in variable clockbase
