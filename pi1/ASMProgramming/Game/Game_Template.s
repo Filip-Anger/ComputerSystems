@@ -33,7 +33,7 @@ next_guess:
         BL    print             @ Print the prompt
 
  	LDR   R0, =input 			@ TASK: Load input buffer address
-        MOV   R1, #input_size			@ TASK: Load input buffer length
+        MOV   R1, #3			@ TASK: Load input buffer length
         BL    read				@ Read 3 chars to input buffer (including newline)
 
 	LDR   R1, =input       
@@ -69,7 +69,7 @@ exit:
 print:                      
         STMFD   SP!, {R7,LR}    	@ Push used registers and LR on the stack;
         MOV R2, R1                     	@ TASK: Move number of characters to print(R1) to R2
-        MOV R1, R2                    	@ TASK: Move address of output string(R0) to R1
+        MOV R1, R0                    	@ TASK: Move address of output string(R0) to R1
         MOV R7, #SYS_WRITE		    	@ TASK: Put the Syscall number in R?
         MOV R0, #STDOUT           		@ TASK: Put the monitor STDOUT in R? - STDOUT IS 1
         SWI 0                    	@ TASK: Uncomment this line to make the syscall
@@ -151,7 +151,7 @@ atoi:
         CMP     R0, #58
         SUBLT   R0, #48
         ORRGT   R0, #0x60 
-        SUBGT   R0, #45                    @ TASK - add the missing code
+        SUBGT   R0, #87                    @ TASK - add the missing code
         MOV     PC, LR
                 
 
@@ -239,7 +239,7 @@ lostgame:         .asciz  "You lose, the number was 00\n"
 .equ              value_offset, 25  @ index into the lostgame 
                                     @ string so the number
                                     @ can be written into it
-.equ              input_size, 3
+
 @@@@ Variables
 .align
 input:            .space 3
