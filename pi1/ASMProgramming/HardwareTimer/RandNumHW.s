@@ -6,7 +6,7 @@
 
 .equ        RAND_LIMIT, 0xF     @ Question: What is the maximum value possible?
 .equ        SYS_EXIT,   0x1
-                                @ TASK: Add clock hardware address constant
+.equ        CLOCK_ADDR, 0x3F003004 @ TASK: Add clock hardware address constant
 
 .text 
 
@@ -54,7 +54,7 @@ gen_number_hardware:
 
 @@@@ Constants
 
-                                    @ TASK: Add string constant for filename
+dev_mem:        .asciz "dev/mem"   @ TASK: Add string constant for filename
 
 .align 4
 file_desc:      .word 0x0           @ File descriptor for /dev/mem

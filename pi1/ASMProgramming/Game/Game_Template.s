@@ -26,7 +26,8 @@ main:
         MOV   R9, #3            @ Initialise remaining guesses to 3
         LDR   R0, =new_game                        @ TASK: Load new game string
         MOV   R1, #new_game_len                            @ TASK: Load new game string length
-        BL    print             @ Print the new game string
+        BL    print
+                                @ Print the new game string
 next_guess:
         LDR   R0, =prompt              @ TASK: Load prompt string address - uh
         MOV   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
@@ -43,12 +44,22 @@ next_guess:
         BL    print_hint        @ Print a hint
 
         CMP   R10, R8           @ If the guess was correct,
-        BEQ   exit             @   Exit
+        BEQ   extra_game             @   Exit
         SUBS  R9, #1            @ Reduce the remaining guesses (!)
         BGT   next_guess        @ Try next guess if available
         MOV   R0, R8            @ Pass 'hidden' number as argument.
         BL    print_lose        @ No guess remaining, you lose.
 
+
+extra_game:
+        BL play_again
+        CMP R0, #0
+        BNE main
+
+play_again: 
+        prapare prijnt
+        BL print
+        take input to R0?
 exit:
     @ If using the RPI, uncomment the lines with the MOV and SWI instructions
     @ If using the simulator, comment the lines with the MOV and SWI instructions
@@ -224,6 +235,8 @@ print_lose:
 @@@@@ Constants 
 .data
 
+next_game:        .asciz "If you want to end enter 'n'\n"
+.equ               next_game_length, 30
 prompt:           .asciz  "Guess a number\n"            @ TASK: Modify the prompt to include the range of values
 .equ              prompt_len, 15
 higher:           .asciz  "Higher\n"
