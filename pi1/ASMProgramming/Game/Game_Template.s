@@ -19,16 +19,16 @@ main:
         MOV   R8, R0            @ Store 'hidden' number in R8
         MOV   R9, #3            @ Initialise remaining guesses to 3
         LDR   R0, =new_game                        @ TASK: Load new game string
-        LDR   R1, #new_game_len                            @ TASK: Load new game string length
+        MOV   R1, #new_game_len                            @ TASK: Load new game string length
         BL    print             @ Print the new game string
 next_guess:
         LDR   R0, =prompt              @ TASK: Load prompt string address - uh
-        LDR   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
+        MOV   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
         BL    print             @ Print the prompt
 
  	LDR   R0, =input 			@ TASK: Load input buffer address
-        LDR   R1, #3			@ TASK: Load input buffer length
-        BL    read				@ Read 3 chars to input buffer (including newline)
+    MOV   R1, #3			@ TASK: Load input buffer length
+    BL    read				@ Read 3 chars to input buffer (including newline)
 
 	LDR   R1, =input       
        	BL    asctonum          @ Convert string to integer.
@@ -171,8 +171,8 @@ gen_number:
         MOV R1, #0                  @ TASK: Load 0 into R1 (time zone)
         MOV R7, #0xE4               @ TASK: Place system call number for gettimeofday in R7
         SWI 0                       @ TASK: Make the system call
-        MOV R1, =time               @ TASK: Load a register with address of musecs variable
-        LDR R0, [R1, #4]             @ TASK: Load R0 with the value at address of musecs
+        LDR R1, =musecs               @ TASK: Load a register with address of musecs variable
+        LDR R0, [R1]             @ TASK: Load R0 with the value at address of musecs
         AND R0, #0x7F               @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
                                     
         MOV     R0, #30             @ Return a fixed value until executing on an RPI 
