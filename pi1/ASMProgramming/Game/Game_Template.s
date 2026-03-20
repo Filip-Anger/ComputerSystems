@@ -8,7 +8,7 @@
 .equ SYS_EXIT, 1
 .equ SYS_READ, 3
 .equ SYS_WRITE, 4
-.equ SYS_GETTIME, 0x4E
+.equ SYS_GETTIME, 78
 .equ STDOUT, 1
 .equ STDIN, 0
 
@@ -51,11 +51,11 @@ next_guess:
 exit:
     @ If using the RPI, uncomment the lines with the MOV and SWI instructions
     @ If using the simulator, comment the lines with the MOV and SWI instructions
-@   MOV     R7, #SYS_EXIT          @ Place code for Exit into R7
-@   SWI     0               @ Make a system call to end the program
+   MOV     R7, #SYS_EXIT          @ Place code for Exit into R7
+   SWI     0               @ Make a system call to end the program
     @ If using the RPI, comment the line with B exit
     @ If using the simulator, uncomment the line with B exit
-    B       exit
+    @B       exit
 
 @ Functions
 
@@ -174,7 +174,7 @@ gen_number:
         STMFD   SP!, {R1,R7,LR}
         LDR R0, =time               @ TASK: Load address of time struct to R0
         MOV R1, #0                  @ TASK: Load 0 into R1 (time zone)
-        MOV R7, #0xE4               @ TASK: Place system call number for gettimeofday in R7
+        MOV R7, #SYS_GETTIME               @ TASK: Place system call number for gettimeofday in R7
         SWI 0                       @ TASK: Make the system call
         LDR R1, =musecs               @ TASK: Load a register with address of musecs variable
         LDR R0, [R1]             @ TASK: Load R0 with the value at address of musecs
