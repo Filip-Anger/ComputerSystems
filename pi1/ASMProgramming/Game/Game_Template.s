@@ -27,8 +27,8 @@ next_guess:
         BL    print             @ Print the prompt
 
  	LDR   R0, =input 			@ TASK: Load input buffer address
-    MOV   R1, #3			@ TASK: Load input buffer length
-    BL    read				@ Read 3 chars to input buffer (including newline)
+        MOV   R1, #3			@ TASK: Load input buffer length
+        BL    read				@ Read 3 chars to input buffer (including newline)
 
 	LDR   R1, =input       
        	BL    asctonum          @ Convert string to integer.
@@ -173,7 +173,7 @@ gen_number:
         SWI 0                       @ TASK: Make the system call
         LDR R1, =musecs               @ TASK: Load a register with address of musecs variable
         LDR R0, [R1]             @ TASK: Load R0 with the value at address of musecs
-        AND R0, #0x7F               @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
+        AND R0, R0, #0x7F               @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
                                     
         MOV     R0, #30             @ Return a fixed value until executing on an RPI 
                                     @ (and the system call can be executed)
