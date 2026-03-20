@@ -18,19 +18,20 @@ main:
 
         MOV   R8, R0            @ Store 'hidden' number in R8
         MOV   R9, #3            @ Initialise remaining guesses to 3
-        LDR   R1, [new_game]                        @ TASK: Load new game string
-        LDR   R2, #new_game_len                            @ TASK: Load new game string length
+        LDR   R0, [=new_game]                        @ TASK: Load new game string
+        LDR   R1, #new_game_len                            @ TASK: Load new game string length
         BL    print             @ Print the new game string
 next_guess:
-                                @ TASK: Load prompt string address
-                                @ TASK: Load prompt length
-        BL    print             @ Print the prompt
 
-@								@ TASK: Load input buffer address
-@								@ TASK: Load input buffer length
-@        BL    read				@ Read 3 chars to input buffer (including newline)
+        LDR   R0, [=prompt]
+        LDR   R1, #new_game_len                  @ TASK: Load prompt string address                        @ TASK: Load prompt length
+        BL    print        @ Print the prompt
 
-		LDR   R1, =input       
+	LDR   R0, [=input]					@ TASK: Load input buffer address
+	LDR   R1, #3							@ TASK: Load input buffer length
+        BL    read				@ Read 3 chars to input buffer (including newline)
+
+	LDR   R1, =input       
        	BL    asctonum          @ Convert string to integer.
         MOV   R1, R8            @ Copy hidden number
         MOV   R10, R0           @ Backup guessed number
@@ -62,11 +63,11 @@ exit:
 @   none
 print:                      
         STMFD   SP!, {R7,LR}    	@ Push used registers and LR on the stack;
-                                	@ TASK: Move number of characters to print(R1) to R2
-                                	@ TASK: Move address of output string(R0) to R1
-            				    	@ TASK: Put the Syscall number in R?
-                    		    	@ TASK: Put the monitor STDOUT in R?
-        @ SWI 0                 	@ TASK: Uncomment this line to make the syscall
+        MOV R2, R1                        	@ TASK: Move number of characters to print(R1) to R2
+        MOV R1, R0                     	@ TASK: Move address of output string(R0) to R1
+        MOV R7, #4	    				    	@ TASK: Put the Syscall number in R?
+        MOV R0, #1           		    	@ TASK: Put the monitor STDOUT in R?
+        SWI 0                 	@ TASK: Uncomment this line to make the syscall
         LDMFD   SP!, {R7,LR}    	@ Restore used registers (update SP with !)
         MOV     PC, LR          	@ Return
 
@@ -78,10 +79,10 @@ print:
 @   none
 read:
         STMFD SP!, {R7, LR}     	@ Push used registers and LR to stack
-                                	@ TASK: Move number of characters to read(R1) to R2
-                                	@ TASK: Move address of input string(R0) to R1
-                                	@ TASK: Put the Syscall number in R?
-                                	@ TASK: Put the keyboard STDIN in R?
+        MOV R2, R1                   	@ TASK: Move number of characters to read(R1) to R2
+        MOV R1, R0                        	@ TASK: Move address of input string(R0) to R1
+        MOV R7, #3                        	@ TASK: Put the Syscall number in R?
+        MOV R0, #0                        	@ TASK: Put the keyboard STDIN in R?
         @SWI 0						@ TASK: Uncomment this line to make the syscall
         LDMFD SP!, {R7, LR}     	@ Restore used registers (update SP with !)
         MOV  PC, LR
@@ -231,7 +232,7 @@ lostgame:         .asciz  "You lose, the number was 00\n"
 
 @@@@ Variables
 .align
-                                	@ TASK: Create user guess variable here (input buffer)
+input:             .space 3                          	@ TASK: Create user guess variable here (input buffer)
 .align
 time:             .space 4      	@ Time (s) since Jan 1 1970
 musecs:           .space 4      	@ Time (ms)
