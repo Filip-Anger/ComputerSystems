@@ -161,10 +161,10 @@ atoi:
 @ Returns:   
 @   R0: related ASCII character ('0'-'9', 'A'-'F')
 itoa:
-        ADD R0, #48
-        CMP R0, #57
-        ADDGT R0, #7                     @ TASK - add the missing code
-        MOV     PC, LR
+        CMP     R0, #9          @ Is the number 0-9?
+        ADDLS   R0, R0, #0x30   @ If Lower or Same as 9, add 0x30 (convertes to '0'-'9')
+        ADDHI   R0, R0, #0x37   @ If Higher than 9, add 0x37 (convertes to 'A'-'F')
+        MOV     PC, LR 
 
 @@@@ gen_number: Generate a number based on the current time
 @ Parameters :
@@ -181,7 +181,7 @@ gen_number:
         LDR R0, [R1]             @ TASK: Load R0 with the value at address of musecs
         AND R0, R0, #0x7F               @ TASK: Perform logical AND of R0 with bitmask 0111 1111 
                                     
-        MOV     R0, #30             @ Return a fixed value until executing on an RPI 
+        @ MOV     R0, #30             @ Return a fixed value until executing on an RPI 
                                     @ (and the system call can be executed)
         LDMFD   SP!, {R1,R7,LR}
         MOV     PC, LR
