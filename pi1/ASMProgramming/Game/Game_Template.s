@@ -237,7 +237,7 @@ lostgame:         .asciz  "You lose, the number was 00\n"
 
 @@@@ Variables
 .align
-input_buffer
+input:            .space 3
                                 	@ TASK: Create user guess variable here (input buffer)
 .align
 time:             .space 4      	@ Time (s) since Jan 1 1970
