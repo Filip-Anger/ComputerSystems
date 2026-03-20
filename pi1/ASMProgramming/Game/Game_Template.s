@@ -26,11 +26,11 @@ next_guess:
         LDR   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
         BL    print             @ Print the prompt
 
- 	LDR   R0, 			@ TASK: Load input buffer address
+ 	LDR   R0, =input_buffer		@ TASK: Load input buffer address
         LDR   R1, #3			@ TASK: Load input buffer length
         BL    read				@ Read 3 chars to input buffer (including newline)
 
-		LDR   R1, =input       
+	LDR   R1, =input_buffer       
        	BL    asctonum          @ Convert string to integer.
         MOV   R1, R8            @ Copy hidden number
         MOV   R10, R0           @ Backup guessed number
@@ -237,7 +237,7 @@ lostgame:         .asciz  "You lose, the number was 00\n"
 
 @@@@ Variables
 .align
-input_size
+input_buffer
                                 	@ TASK: Create user guess variable here (input buffer)
 .align
 time:             .space 4      	@ Time (s) since Jan 1 1970
