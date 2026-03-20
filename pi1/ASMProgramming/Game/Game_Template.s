@@ -18,16 +18,16 @@ main:
 
         MOV   R8, R0            @ Store 'hidden' number in R8
         MOV   R9, #3            @ Initialise remaining guesses to 3
-        LDR   R1, [new_game]                        @ TASK: Load new game string
-        LDR   R2, #new_game_len                            @ TASK: Load new game string length
+        LDR   R0, =new_game                        @ TASK: Load new game string
+        LDR   R1, #new_game_len                            @ TASK: Load new game string length
         BL    print             @ Print the new game string
 next_guess:
-                                @ TASK: Load prompt string address
-                                @ TASK: Load prompt length
+        LDR   R0, =prompt              @ TASK: Load prompt string address - uh
+        LDR   R1, #prompt_len            @ TASK: Load prompt length - always 2 because hex
         BL    print             @ Print the prompt
 
-@								@ TASK: Load input buffer address
-@								@ TASK: Load input buffer length
+ 	LDR   			@ TASK: Load input buffer address
+        LDR   			@ TASK: Load input buffer length
 @        BL    read				@ Read 3 chars to input buffer (including newline)
 
 		LDR   R1, =input       
