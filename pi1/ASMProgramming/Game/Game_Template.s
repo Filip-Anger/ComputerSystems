@@ -64,9 +64,9 @@ print:
         STMFD   SP!, {R7,LR}    	@ Push used registers and LR on the stack;
         MOV R2, R1                     	@ TASK: Move number of characters to print(R1) to R2
         MOV R1, R2                    	@ TASK: Move address of output string(R0) to R1
-        MOV     R7, #4		    	@ TASK: Put the Syscall number in R?
-                    		    	@ TASK: Put the monitor STDOUT in R?
-        @ SWI 0                 	@ TASK: Uncomment this line to make the syscall
+        MOV R7, #4		    	@ TASK: Put the Syscall number in R?
+        MOV R0, #1            		@ TASK: Put the monitor STDOUT in R? - STDOUT IS 1
+        SWI 0                    	@ TASK: Uncomment this line to make the syscall
         LDMFD   SP!, {R7,LR}    	@ Restore used registers (update SP with !)
         MOV     PC, LR          	@ Return
 
@@ -78,11 +78,11 @@ print:
 @   none
 read:
         STMFD SP!, {R7, LR}     	@ Push used registers and LR to stack
-                                	@ TASK: Move number of characters to read(R1) to R2
-                                	@ TASK: Move address of input string(R0) to R1
-                                	@ TASK: Put the Syscall number in R?
-                                	@ TASK: Put the keyboard STDIN in R?
-        @SWI 0						@ TASK: Uncomment this line to make the syscall
+        MOV R2, R1                        	@ TASK: Move number of characters to read(R1) to R2
+        MOV R1, R0                        	@ TASK: Move address of input string(R0) to R1
+        MOV R7, #3                        	@ TASK: Put the Syscall number in R?
+        MOV R0, #0                        	@ TASK: Put the keyboard STDIN in R?
+        SWI 0						@ TASK: Uncomment this line to make the syscall
         LDMFD SP!, {R7, LR}     	@ Restore used registers (update SP with !)
         MOV  PC, LR
 
