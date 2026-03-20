@@ -4,7 +4,7 @@
 
 .global     main
 
-.equ        RAND_LIMIT, 0xF     @ Question: What is the maximum value possible?
+.equ        RAND_LIMIT, 0xF        @ Question: What is the maximum value possible?
 .equ        SYS_EXIT,   0x1
 .equ        CLOCK_ADDR, 0x3F003004 @ TASK: Add clock hardware address constant
 
@@ -13,9 +13,9 @@
 
 main:     
     BL      open_mem            @ Open /dev/mem  (requires sudo)
-                                @ TASK: Load hardware clock address
+    MOV     R0, #CLOCK_ADDR     @ TASK: Load hardware clock address
     BL      map                 @ Map hardware clock to memory (R0 contains address)
-                                @ TASK: Load address of clockbase variable
+    LDR     R1, =clockbase      @ TASK: Load address of clockbase variable
     STR     R0, [R1]            @ Store mapped memory start address in variable clockbase
 
     BL      gen_number_hardware @ Generate a random number (returned in R0)
@@ -23,8 +23,10 @@ main:
 
 exit:
     LDR     R0, =clockbase      @ Load start address of map
+    LDR     R0, [R0]
     BL      unmap               @ Unmap the access to hardware
-                                @ TASK: Load the value of the file descriptor
+    LDR     R0, =file_desc      @ TASK: Load the value of the file descriptor
+    LDR     R0, [R0]
     BL      close_mem           @ Close /dev/mem
     MOV     R0, R8              @ Place random number in R0 (view on terminal with echo $?)
     MOV     R7, #SYS_EXIT       @ exit syscall
