@@ -1,13 +1,17 @@
+SUMBIT HardwareGame/TheGame_constants.s
+
 6.6 - LED_TEmplate.s is done
     Just connect cables and run - do as a test!
-    Reconfigue pin 22
+    Reconfigue pin 22 - why?
 
 
-6.7 Use two custom LEDS
+6.7 Use two custom 
+    Done-ish
 
 
 6.8 Delay and blink - we need a timer: Hardware2.s
-    Implement blink loop
+    Implement blink loop - done
+    Should work?
 
 
 =================

@@ -19,30 +19,25 @@
 .equ        GPIO_ADDR,	0x3F200000  @ GPIO_Base for RPi 3 
 
 .text
-.include "Hardware.s"           @ open, map, unmap and close functions
-
+.include "Hardware2.s"           @ open, map, unmap and close functions
+.include "Wait.s"
 main:                               
-		BL		open_mem		    @ Open /dev/mem
-		LDR		R0, =GPIO_ADDR	    @ Load hardware address to map
- 		BL		map				    @ call mmap2
-		LDR		R1, =gpiobase	    @ Store address of mapping
-		STR		R0, [R1]
+ 		BL		map_io				    @ call mmap2
 
-		MOV		R0, #22				@ Pin number
-		MOV		R1, #1				@ Code for output
-		BL		set_pin_function	@ Set pin to output
+		MOV		R1, #21				@ Code for output
+		MOV             R2, #10                         @ count
+                MOV             R3, #500                     @ delay 
+                BL		set_pin_function	@ Set pin to output
 		CMP		R0, #0				@ If return value ... 
 		BLT		exit				@	<0 (error) then exit
 
-		MOV		R0, #22			    @ Pin number
-		MOV 	        R1, #0x1C		    @ Set (turn on LED)
-		BL		set_pin_value	    @ Turn on LED
+		MOV		R0, #21			@ Pin number 1
+		MOV 	        R1, #0x1C               @ Set (blink LED)
+		BL		blink_loop	    @ blink on LED
+
+
+                @ WHEN does exit go?? instatnly?? never?
 exit:
-		LDR		R0, =gpiobase	    @ Load start unmap the memory
-        LDR     R0, [R0]
-		BL		unmap			    @ Unmap
-		LDR	    R1, =file_desc    	@ Load file decriptor address
-        LDR	    R0, [R1]            @ Load file descriptor value
 		BL		close_mem		    @ Close /dev/mem
 							
 		MOV		R7, #SYS_EXIT	    @ Return

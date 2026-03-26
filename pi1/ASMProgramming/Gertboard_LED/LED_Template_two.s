@@ -28,15 +28,27 @@ main:
 		LDR		R1, =gpiobase	    @ Store address of mapping
 		STR		R0, [R1]
 
-		MOV		R0, #22				@ Pin number
+		MOV		R0, #21				@ LED 1 Pin number
 		MOV		R1, #1				@ Code for output
 		BL		set_pin_function	@ Set pin to output
 		CMP		R0, #0				@ If return value ... 
 		BLT		exit				@	<0 (error) then exit
 
-		MOV		R0, #22			    @ Pin number
+                MOV		R0, #20				@ LED 2 Pin number
+		MOV		R1, #1				@ Code for output
+		BL		set_pin_function	@ Set pin to output
+		CMP		R0, #0				@ If return value ... 
+		BLT		exit				@	<0 (error) then exit
+
+		MOV		R0, #21			    @ Pin number 1
 		MOV 	        R1, #0x1C		    @ Set (turn on LED)
 		BL		set_pin_value	    @ Turn on LED
+
+                MOV		R0, #20			    @ Pin number 2
+		MOV 	        R1, #0x1C		    @ Set (turn on LED)
+		BL		set_pin_value	    @ Turn on LED
+                
+                @ WHEN does exit go?? instatnly?? never?
 exit:
 		LDR		R0, =gpiobase	    @ Load start unmap the memory
         LDR     R0, [R0]
