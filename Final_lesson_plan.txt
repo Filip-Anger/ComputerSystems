@@ -1,0 +1,23 @@
+6.6 - LED_TEmplate.s is done
+    Just connect cables and run - do as a test!
+    Reconfigue pin 22
+
+
+6.7 Use two custom LEDS
+
+
+6.8 Delay and blink - we need a timer: Hardware2.s
+    Implement blink loop
+
+
+=================
+MULTIPLE LEDS
+=================
+
+6.9 Done, Binary.s
+
+
+6.10 - HARD
+
+
+6.11 fine

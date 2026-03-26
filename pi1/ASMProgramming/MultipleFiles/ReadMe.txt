@@ -1,1 +1,0 @@
-This folder contains an examples of how to work with multiple files. This is useful once programs start to get very large and subroutines can be grouped together based on functionality.
