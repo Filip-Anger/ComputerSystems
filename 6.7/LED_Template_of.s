@@ -19,9 +19,8 @@
 
 .equ GPCLR0, 0x28 		@ Value to set a GPIO pin to OFF
 .equ GPSET0, 0x1C 		@ Value to set a GPIO pin to ON
-
 .equ GERT22, 22 		@ RPi GPIO to gertboard mappings
-.equ GERT24, 24 		@ RPi GPIO to gertboard mappings
+.equ GERT21, 21
 
 .equ        GPIO_ADDR,	0x3F200000  @ GPIO_Base for RPi 3 
 
@@ -35,8 +34,6 @@ main:
 		LDR		R1, =gpiobase	    @ Store address of mapping
 		STR		R0, [R1]
 
-
-		@ Contol GERT22
 		LDR		R0, =GERT22				@ Pin number
 		MOV		R1, #1				@ Code for output
 		BL		set_pin_function	@ Set pin to output
@@ -44,22 +41,23 @@ main:
 		BLT		exit				@	<0 (error) then exit
 
 		LDR		R0, =GERT22			    @ Pin number
-		LDR 	R1, =GPSET0		    @ Set (turn on LED)
+		LDR 	R1, =GPCLR0		    @ Set (turn on LED)
+                @on GPSET0
+                @of GPCLR0
 		BL		set_pin_value	    @ Turn on LED
-		
-		
-		@ Contol GERT24
-		LDR		R0, =GERT24				@ Pin number
+
+                @------------------------
+                LDR		R0, =GERT21				@ Pin number
 		MOV		R1, #1				@ Code for output
 		BL		set_pin_function	@ Set pin to output
 		CMP		R0, #0				@ If return value ... 
 		BLT		exit				@	<0 (error) then exit
 
-		LDR		R0, =GERT24			    @ Pin number
-		LDR 	R1, =GPSET0		    @ Set (turn on LED)
+		LDR		R0, =GERT21			    @ Pin number
+		LDR 	R1, =GPCLR0		    @ Set (turn on LED)
+                @on GPSET0
+                @of GPCLR0
 		BL		set_pin_value	    @ Turn on LED
-		
-		
 exit:
 		LDR		R0, =gpiobase	    @ Load start unmap the memory
         LDR     R0, [R0]
@@ -160,7 +158,7 @@ check_pin:
         CMP	    R0, #6				@ GPIO6 not available
         BEQ	    error
         CMP	    R0, #16				@ GPIO 12, 13, 16 not available - R1 >16?
-        BHI	    next_check			@ GPIO 14 and 15 set for UART so leave alone
+        BHI	    next_check			        @ GPIO 14 and 15 set for UART so leave alone
         CMP	    R0, #11				@ GPIO# <12?
         BLS	    next_check
         BAL	    error
@@ -188,5 +186,5 @@ dev_mem:	.asciz "/dev/mem"
 
 @@@@ Variables
 .align 4
-file_desc:  .word	0x0			    @ file descriptor
+file_desc:      .word	0x0			    @ file descriptor
 gpiobase:	.word	0x0			    @ address to which gpio is mapped

@@ -20,7 +20,7 @@
 .equ GPCLR0, 0x28 		@ Value to set a GPIO pin to OFF
 .equ GPSET0, 0x1C 		@ Value to set a GPIO pin to ON
 .equ GERT22, 22 		@ RPi GPIO to gertboard mappings
-
+.equ GERT21, 21
 
 .equ        GPIO_ADDR,	0x3F200000  @ GPIO_Base for RPi 3 
 
@@ -42,6 +42,21 @@ main:
 
 		LDR		R0, =GERT22			    @ Pin number
 		LDR 	R1, =GPSET0		    @ Set (turn on LED)
+                @on GPSET0
+                @of GPCLR0
+		BL		set_pin_value	    @ Turn on LED
+
+                @------------------------
+                LDR		R0, =GERT21				@ Pin number
+		MOV		R1, #1				@ Code for output
+		BL		set_pin_function	@ Set pin to output
+		CMP		R0, #0				@ If return value ... 
+		BLT		exit				@	<0 (error) then exit
+
+		LDR		R0, =GERT21			    @ Pin number
+		LDR 	R1, =GPSET0		    @ Set (turn on LED)
+                @on GPSET0
+                @of GPCLR0
 		BL		set_pin_value	    @ Turn on LED
 exit:
 		LDR		R0, =gpiobase	    @ Load start unmap the memory

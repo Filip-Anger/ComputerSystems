@@ -7,7 +7,7 @@
 
                                         @ Set counter = 10 already in 
                         @ PARAMETERS
-                        @ Blinking pin R1, #21	
+                        @ Blinking pin R1, #22	
                         @ R2, count
                         @ R3 delay (ms) 
 blink_loop:
@@ -23,7 +23,7 @@ blink_loop:
                 BL              wait            @ Call the wait function
                 @ Turn the LED off
                 MOV R0, R1
-                MOV R1, #off value
+                MOV R1, #0x28 
                 BL		set_pin_function	@ Set pin to output
 		CMP		R0, #0			@ If return value ... 
 		BLT		exit
@@ -33,7 +33,7 @@ blink_loop:
                 @ Decrement counter
                 SUB R3, #1
                 @ IF counter > 0
-                CMP R3, 0
+                CMP R3, #0
                 @ THEN Branch to blink_loop
                 BGT             blink_loop   
                 @ ELSE End Program

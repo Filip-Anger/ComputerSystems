@@ -276,7 +276,7 @@ play_again:
 @@@@@ Constants 
 .data
 
-play_again_s:       .asciz  "Would you like to play agein: \n"  
+play_again_s:       .asciz  "Would you like to play again: \n"  
 .equ              play_again_len, 31
 prompt:           .asciz  "Guess a number\n"            @ TASK: Modify the prompt to include the range of values
 .equ              prompt_len, 15

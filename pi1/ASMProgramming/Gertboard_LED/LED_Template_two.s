@@ -17,6 +17,8 @@
 .equ        SYS_EXIT,   0x1
 
 .equ        GPIO_ADDR,	0x3F200000  @ GPIO_Base for RPi 3 
+.equ OFF, 0x28 		@ Value to set a GPIO pin to OFF
+.equ ON, 0x1C 
 
 .text
 .include "Hardware.s"           @ open, map, unmap and close functions
@@ -41,11 +43,11 @@ main:
 		BLT		exit				@	<0 (error) then exit
 
 		MOV		R0, #21			    @ Pin number 1
-		MOV 	        R1, #0x1C		    @ Set (turn on LED)
+		MOV 	        R1, #OFF		    @ Set (turn on LED)
 		BL		set_pin_value	    @ Turn on LED
 
                 MOV		R0, #20			    @ Pin number 2
-		MOV 	        R1, #0x1C		    @ Set (turn on LED)
+		MOV 	        R1, #OFF		    @ Set (turn on LED)
 		BL		set_pin_value	    @ Turn on LED
                 
                 @ WHEN does exit go?? instatnly?? never?
