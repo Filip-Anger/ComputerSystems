@@ -14,7 +14,7 @@
 .equ STDOUT,      1
 
 .text
-include "RandNumHW.s"
+.include "RandNumHW.s"
 @ Game control loop (between main: and _exit:)
 @ Register usage:
 @ R8: generated random number
