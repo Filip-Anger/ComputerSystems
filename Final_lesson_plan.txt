@@ -19,9 +19,15 @@ MULTIPLE LEDS
 =================
 
 6.9 Done, Binary.s
+    - connect pins --- 
 
 
 6.10 - HARD
+    how to complete the array?? - 2^GPIO
+    create mask
+
+6.11 
 
 
-6.11 fine
+
+SESSION 7

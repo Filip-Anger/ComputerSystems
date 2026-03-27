@@ -39,7 +39,6 @@ main:
 		BL	    map_io          	@ open /dev/mem and map hardware
     	BL	    init_pins
     	MVN	    R0, #0          	@ Value to display
-		@ MOV		R0, #0xFFFFFFF
     	BL	    disp_num
 exit:
 		BL	    unmap_io        	@ unmap and close hardware addresses
@@ -129,6 +128,31 @@ exit_set_func:
 		MOV     PC, LR					@ R0 still holds GPIO base address if no error occurred..
 
 
+extra_game:
+ 		BL play_again 			@ Ask for another game.
+ 		CMP   R0, #0 			@ IF answer is not ‘n’
+ 		BNE main 
+		
+play_again:
+	STMFD   SP!, {R7, LR}       @ Push used registers to the stack
+    
+    LDR     R0, =play_prompt    @ Load play again prompt reference
+    MOV     R1, #play_prompt_len@ Load play again prompt length
+    BL      print               @ Call print function
+    
+    LDR     R0, =input          @ Load the input reference (buffer)
+    MOV     R1, #3              @ Set the string length to read as 3
+    BL      read                @ Call the input (read) function
+    
+    LDR     R1, =input          @ Address of where the string was stored
+    LDRB    R0, [R1]            @ Load the first byte (the character) to R0
+    
+    ORR     R0, R0, #0x20       @ Convert to lower case (forces bit 5 to 1)
+    SUB     R0, R0, #110        @ Subtract lowercase 'n' (ASCII 110)
+    
+    LDMFD   SP!, {R7, LR}       @ Pop used registers from the stack
+    MOV     PC, LR 
+
 @@@@ set_pin_value:	function to set the pin
 @ Paramters:
 @   R0: 	pin number
@@ -206,7 +230,7 @@ disp_bits:
 	.word   0x400000
 	.word	0x800000
 	.word	0x1000000 	
-
+		
 file_desc:  .word	0x0			    @ file descriptor
 gpiobase:	.word	0x0
 @@@@ Variables
